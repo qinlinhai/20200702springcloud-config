@@ -15,3 +15,30 @@ spring:
 mybatis:
   type-aliases-package: com.qin.entity
   mapper-locations: classpath:mapper/*.xml
+mvc:
+  date-format: yyyy-MM-dd
+jackson:
+  date-format: yyyy-MM-dd
+  time-zone: GMT+8
+#去注册中心注册自己
+  #配置eureka的注册中心地址(方便于自己向eureka中去注册)
+# 在consumer中有一个restTemplate(模拟http协议)--->http://localhost:8081/all
+# 之后就不会再使用真实地址来调用
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka01:9001/eureka/,http://eureka02:9002/eureka/,http://eureka03:9003/eureka/
+  instance:
+    prefer-ip-address: true
+    # 失效eureka的自我保护机制
+    # 配置自己向eureka去发送心跳的时间(单位是秒)
+    lease-renewal-interval-in-seconds: 5000
+    # 配置在eureka最后一次接收到心跳往后数几秒进行剔除
+    lease-expiration-duration-in-seconds: 8000
+info:
+  author:
+    name: qin
+  company:
+    name: qinbaba
+  project:
+    description: Test Emp Demo
